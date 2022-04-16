@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+
+  gate-simulator:
+    build: .
+    image: gate-simulator:1.0
+    ports:
+      - '9999:9999'
+
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=base_mysql
+      - MYSQL_USER=adm
+      - MYSQL_PASSWORD=9mRE
+
+  postgresql:
+    image: postgres:12-alpine
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./data/postgres:/var/lib/postgres
+    environment:
+      - POSTGRES_DB=base_postgresql
+      - POSTGRES_USER=adm
+      - POSTGRES_PASSWORD=9mRE
